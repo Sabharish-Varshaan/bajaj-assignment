@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BFHL API Tester</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>BFHL API Tester</h2>
+    <p>Enter edges (comma-separated OR JSON format)</p>
+
+    <textarea id="input" placeholder='A->B, B->C OR {"data": ["A->B","B->C"]}'></textarea>
+
+    <button onclick="sendRequest()">Submit</button>
+
+    <div id="status"></div>
+
+    <div id="result"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
