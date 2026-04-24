@@ -1,3 +1,7 @@
+// 🔥 CHANGE ONLY THIS IF NEEDED
+const API_URL = "https://sabharishvarshaans-bfhl-production.up.railway.app/bfhl";
+
+
 async function sendRequest() {
     const input = document.getElementById("input").value;
     const statusDiv = document.getElementById("status");
@@ -27,7 +31,7 @@ async function sendRequest() {
     statusDiv.innerHTML = "Processing...";
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/bfhl", {
+        const response = await fetch(API_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -47,14 +51,25 @@ async function sendRequest() {
         let html = "";
 
         html += displayHierarchies(result.hierarchies);
+
         html += displaySummary(result.summary);
 
         if (result.invalid_entries.length > 0) {
-            html += `<div class="card"><h3>Invalid Entries</h3><p>${result.invalid_entries.join(", ")}</p></div>`;
+            html += `
+                <div class="card">
+                    <h3>Invalid Entries</h3>
+                    <p>${result.invalid_entries.join(", ")}</p>
+                </div>
+            `;
         }
 
         if (result.duplicate_edges.length > 0) {
-            html += `<div class="card"><h3>Duplicate Edges</h3><p>${result.duplicate_edges.join(", ")}</p></div>`;
+            html += `
+                <div class="card">
+                    <h3>Duplicate Edges</h3>
+                    <p>${result.duplicate_edges.join(", ")}</p>
+                </div>
+            `;
         }
 
         resultDiv.innerHTML = html;
@@ -63,6 +78,7 @@ async function sendRequest() {
         statusDiv.innerHTML = '<div class="error">Cannot connect to server</div>';
     }
 }
+
 
 function renderTree(node, tree, isRoot = false) {
     let html = `<li class="${isRoot ? 'root-node' : ''}">
@@ -80,6 +96,7 @@ function renderTree(node, tree, isRoot = false) {
     html += "</li>";
     return html;
 }
+
 
 function displayHierarchies(hierarchies) {
     let html = "";
